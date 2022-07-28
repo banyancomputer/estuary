@@ -50,6 +50,7 @@ import (
 
 var log = logging.Logger("est-node")
 
+/* Default list of bootstrappers to use. */
 var bootstrappers = []string{
 	"/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
 	"/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
@@ -57,6 +58,8 @@ var bootstrappers = []string{
 	"/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt",
 }
 
+/* A list of Peers to connect to */
+/* TODO: We need to figure out how our providers fit into this */
 var peeringPeers = []peering.PeeringPeer{
 	//Cloudflare
 	{ID: "QmcfgsJsMtx6qJb74akCw1M24X1zFwgGo11h1cuhwQjtJP", Addrs: []string{"/ip6/2606:4700:60::6/tcp/4009", "/ip4/172.65.0.13/tcp/4009"}},

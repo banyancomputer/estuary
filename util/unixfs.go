@@ -15,8 +15,10 @@ import (
 	mh "github.com/multiformats/go-multihash"
 )
 
+// TODO: This would be Blake3 once we get that support
 var DefaultHashFunction = uint64(mh.SHA2_256)
 
+// TODO: This is where file processing for bao files should happen
 func ImportFile(dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
 	prefix, err := merkledag.PrefixForCidVersion(1)
 	if err != nil {
@@ -24,6 +26,7 @@ func ImportFile(dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
 	}
 	prefix.MhType = DefaultHashFunction
 
+    // TODO: Fix chunking to be configurable/work with bao
 	spl := chunker.NewSizeSplitter(fi, 1024*1024)
 	dbp := ihelper.DagBuilderParams{
 		Maxlinks:  1024,

@@ -12,6 +12,7 @@ import (
 
 	"github.com/application-research/estuary/node/modules/peering"
 
+    // TODO: Update to use OpenTelemetry
 	"go.opencensus.io/stats/view"
 
 	"github.com/application-research/estuary/build"
@@ -49,6 +50,8 @@ import (
 var appVersion string
 var log = logging.Logger("estuary").With("app_version", appVersion)
 
+/* What Defines a Storage Miner */
+// TODO: We might want to change this to a `StorageProvider` interface
 type storageMiner struct {
 	gorm.Model
 	Address         util.DbAddr `gorm:"unique"`
@@ -60,6 +63,7 @@ type storageMiner struct {
 	Owner           uint
 }
 
+/* What Defines a piece of content */
 type Content struct {
 	ID        uint           `gorm:"primarykey" json:"id"`
 	CreatedAt time.Time      `json:"-"`
@@ -513,10 +517,10 @@ func main() {
 			Usage: "Saves a configuration file to the location specified by the config parameter",
 			Action: func(cctx *cli.Context) error {
 				configFile := cctx.String("config")
-				if err := cfg.Load(configFile); err != nil && err != config.ErrNotInitialized { // still want to report parsing errors
+				if err := cfg.Load(configFile); err != nil && err != config.ErrNotInitialized {
+				    fmt.Printf("Error loading config file: %v\n", err)
 					return err
 				}
-
 				if err := overrideSetOptions(app.Flags, cctx, cfg); err != nil {
 					return err
 				}
