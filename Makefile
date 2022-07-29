@@ -58,7 +58,13 @@ GOFLAGS+=-ldflags="$(ldflags)"
 # export CGO_CFLAGS+=-Wno-stringop-overflow
 
 .PHONY: build
-build: deps estuary shuttle benchest bsget
+build: obao deps estuary shuttle benchest bsget
+
+# Before building this, make sure we build the rust libs first.
+# 	cp lib/obao/target/release/libobao.so lib/
+# 	cd lib/obao && cargo build --release
+.PHONY: obao
+	go build -ldflags="-r ./util/gobao/lib" gobao.go
 
 .PHONY: deps
 deps: $(BUILD_DEPS)

@@ -13,11 +13,14 @@ import (
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	mh "github.com/multiformats/go-multihash"
+    gobao "github.com/application-research/estuary/util/gobao"
+
 )
 
 var DefaultHashFunction = uint64(mh.SHA2_256)
 
 func ImportFile(dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
+    gobao.process_file("test.pdf")
 	prefix, err := merkledag.PrefixForCidVersion(1)
 	if err != nil {
 		return nil, err
