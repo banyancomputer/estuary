@@ -1165,6 +1165,7 @@ func (s *Shuttle) handleAdd(c echo.Context, u *User) error {
 	}
 
 	filename := mpf.Filename
+	filesize := mpf.Size
 	fi, err := mpf.Open()
 	if err != nil {
 		return err
@@ -1192,7 +1193,7 @@ func (s *Shuttle) handleAdd(c echo.Context, u *User) error {
 	bserv := blockservice.New(bs, nil)
 	dserv := merkledag.NewDAGService(bserv)
 
-	nd, err := s.importFile(ctx, dserv, fi)
+	nd, err := s.importFile(ctx, dserv, fi, filename, filesize)
 	if err != nil {
 		return err
 	}
@@ -1726,11 +1727,11 @@ func (s *Shuttle) addPinToQueue(p Pin, peers []*peer.AddrInfo, replace uint) {
 	s.PinMgr.Add(op)
 }
 
-func (s *Shuttle) importFile(ctx context.Context, dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
+func (s *Shuttle) importFile(ctx context.Context, dserv ipld.DAGService, fi io.Reader, filename string, filesize int64) (ipld.Node, error) {
 	_, span := s.Tracer.Start(ctx, "importFile")
 	defer span.End()
 
-	return util.ImportFile(dserv, fi)
+	return util.ImportFile(dserv, fi, filename, filesize)
 }
 
 func (s *Shuttle) dumpBlockstoreTo(ctx context.Context, from, to blockstore.Blockstore) error {

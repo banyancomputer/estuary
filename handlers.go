@@ -843,6 +843,7 @@ func (s *Server) handleAdd(c echo.Context, u *User) error {
 	}
 
 	filename := mpf.Filename
+	filesize := mpf.Size
 	if fvname := c.FormValue("filename"); fvname != "" {
 		filename = fvname
 	}
@@ -903,7 +904,17 @@ func (s *Server) handleAdd(c echo.Context, u *User) error {
 	bserv := blockservice.New(bs, nil)
 	dserv := merkledag.NewDAGService(bserv)
 
-	nd, err := s.importFile(ctx, dserv, fi)
+    // write the fi to tmp
+    tmp_fi, _:= mpf.Open()
+    tmp_file_path := "/tmp/" + filename
+    tmp_file, err := os.Create(tmp_file_path)
+    if err != nil {
+        return err
+    }
+    defer tmp_file.Close()
+    io.Copy(tmp_file, tmp_fi)
+
+	nd, err := s.importFile(ctx, dserv, fi, tmp_file_path, filesize)
 	if err != nil {
 		return err
 	}
@@ -997,11 +1008,11 @@ func (s *Server) redirectContentAdding(c echo.Context, u *User) error {
 	return nil
 }
 
-func (s *Server) importFile(ctx context.Context, dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
+func (s *Server) importFile(ctx context.Context, dserv ipld.DAGService, fi io.Reader, filename string, filesize int64) (ipld.Node, error) {
 	_, span := s.tracer.Start(ctx, "importFile")
 	defer span.End()
 
-	return util.ImportFile(dserv, fi)
+	return util.ImportFile(dserv, fi, filename, filesize)
 }
 
 var noDataTimeout = time.Minute * 10

@@ -13,14 +13,14 @@ import (
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	mh "github.com/multiformats/go-multihash"
-    gobao "github.com/application-research/estuary/util/gobao"
 
+	/*Banyan Oracle Storage */
+	banyan_oracle "github.com/banyancomputer/oracle-storage"
 )
 
 var DefaultHashFunction = uint64(mh.SHA2_256)
 
-func ImportFile(dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
-    gobao.process_file("test.pdf")
+func ImportFile(dserv ipld.DAGService, fi io.Reader, filename string, filesize int64) (ipld.Node, error) {
 	prefix, err := merkledag.PrefixForCidVersion(1)
 	if err != nil {
 		return nil, err
@@ -45,7 +45,21 @@ func ImportFile(dserv ipld.DAGService, fi io.Reader) (ipld.Node, error) {
 		return nil, err
 	}
 
-	return balanced.Layout(db)
+	ret, err := balanced.Layout(db)
+    if err != nil {
+        return nil, err
+    }
+
+
+    err = banyan_oracle.Store(filename, filesize, ret.Cid().String());
+    println("Storing file in banyan_oracle: " + filename + " " + ret.Cid().String());
+    if err != nil {
+        println("Error storing file in banyan_oracle: " + filename + " " + ret.Cid().String());
+        println(err.Error());
+        return nil, err
+    }
+
+    return ret, nil
 }
 
 func TryExtractFSNode(nd ipld.Node) (*unixfs.FSNode, error) {
