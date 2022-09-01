@@ -9,6 +9,8 @@ WORKDIR=/app
 FULLNODE_API=$FULLNODE_API
 ESTUARY_HOST=$ESTUARY_HOST
 ESTUARY_PORT=$ESTUARY_PORT
+ESTUARY_WWW_HOST=$ESTUARY_WWW_HOST
+ESTUARY_WWW_PORT=$ESTUARY_WWW_PORT
 
 if [ -z "$FULLNODE_API" ]; then
     echo "FULLNODE_API is empty, use default value"
@@ -17,21 +19,6 @@ fi
 
 echo "HOSTNAME: $ESTUARY_HOSTNAME:$ESTUARY_PORT"
 echo "FULLNODE_API: $FULLNODE_API"
-
-
-# if test -f "$FILE"; then
-#     echo "$FILE exists."
-#     /usr/src/estuary/estuary --hostname $ESTUARY_HOSTNAME
-# else
-#     echo "$FILE does not exist."
-#     mkdir -p /usr/src/estuary/data
-#     # note (al): Pretty sure this has changed since our last commit
-#     # AUTH_KEY=$(/usr/src/estuary/estuary setup --username admin --password Password123 | grep Token | cut -d ' ' -f 3)
-#     AUTH_KEY=$(/usr/src/estuary/estuary setup --username=admin | grep Token | cut -d ' ' -f 3)
-#     echo $AUTH_KEY
-#     echo $AUTH_KEY > /usr/estuary/private/token
-#     cat /usr/estuary/private/token
-# fi
 
 # Setup a new node and record the Estuary Token
 mkdir -p $WORKDIR/data
@@ -43,4 +30,5 @@ echo "Estuary Admin Key: $ESTUARY_TOKEN"
 # This is needed to make sure we dont get 'too many open files' errors
 ulimit -n 10000
 
+# Start the Estuary node
 $WORKDIR/estuary $ESTUARY_HOSTNAME
