@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1
 
 # ## Build
-# FROM golang:1.16.11-stretch
-
+FROM golang:1.18-bullseye
+# FROM rust:1.63.0-alpine3.15
 
 # Default Arguments for the Build
-ARG arg_repo_branch=master
+ARG arg_repo_branch=docker
 ARG arg_estuary_host=estuary-main
 ARG arg_estuary_port=3004
 ARG arg_fullnode_api=ws://api.chain.love
@@ -32,9 +32,11 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN cargo --help
 
 # Copy our Source Code from the Git Repository, Download Dependencies, and Compile
-RUN git clone -b $arg_repo_branch https://github.com/banyancomputer/estuary .
-RUN go mod download
-RUN RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make all
+# RUN go mod download github.com/filecoin-project/lotus
+RUN git clone -b docker https://github.com/banyancomputer/estuary . && \
+    RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make all
+# COPY . /app
+# RUN RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make all
 RUN chmod +x /app/docker-start.sh
 
 EXPOSE 3004

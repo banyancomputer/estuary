@@ -1,9 +1,7 @@
 #/bin/bash
 
-'''
-This is the script that is run when the docker container is started.
-Please see the Dockerfile for more information on the context of this script.
-'''
+#This is the script that is run when the docker container is started.
+# Please see the Dockerfile for more information on the context of this script.
 
 # This is the WORKDIR of the docker container.
 WORKDIR=/app
@@ -41,5 +39,8 @@ mkdir -p $WORKDIR/private
 ESTUARY_TOKEN=$($WORKDIR/estuary setup --username=admin | grep Token | cut -d ' ' -f 3)
 echo $ESTUARY_TOKEN > $WORKDIR/private/token
 echo "Estuary Admin Key: $ESTUARY_TOKEN"
+
+# This is needed to make sure we dont get 'too many open files' errors
+ulimit -n 10000
 
 $WORKDIR/estuary $ESTUARY_HOSTNAME
