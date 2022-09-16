@@ -903,8 +903,10 @@ func (s *Server) handleAdd(c echo.Context, u *User) error {
 		return err
 	}
     defer _fi.Close()
-	hash := blake3.New(32, nil)
-	fi := io.TeeReader(_fi, hash)
+    // Initialize a new 32-byte Hasher
+    hash := blake3.New(32, nil)
+    // Initialize a TeeReader to write to write to the hasher as we read from the file
+    fi := io.TeeReader(_fi, hash)
 
 	replication := s.CM.Replication
 	replVal := c.FormValue("replication")

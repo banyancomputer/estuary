@@ -9,6 +9,8 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+    "encoding/hex"
+
 
 	//#nosec G108 - exposing the profiling endpoint is expected
 	_ "net/http/pprof"
@@ -73,6 +75,7 @@ import (
 	rcmgr "github.com/libp2p/go-libp2p-resource-manager"
 	routed "github.com/libp2p/go-libp2p/p2p/host/routed"
 	"github.com/whyrusleeping/memo"
+	"lukechampine.com/blake3"
 )
 
 var appVersion string
@@ -1189,11 +1192,15 @@ func (s *Shuttle) handleAdd(c echo.Context, u *User) error {
 	}
 
 	filename := mpf.Filename
-	fi, err := mpf.Open()
+	_fi, err := mpf.Open()
 	if err != nil {
 		return err
 	}
-	defer fi.Close()
+	defer _fi.Close()
+	// Initialize a new 32-byte Hasher
+    hash := blake3.New(32, nil)
+    // Initialize a TeeReader to write to write to the hasher as we read from the file
+    fi := io.TeeReader(_fi, hash)
 
 	cic := util.ContentInCollection{
 		CollectionID:  c.QueryParam(ColUuid),
@@ -1223,7 +1230,7 @@ func (s *Shuttle) handleAdd(c echo.Context, u *User) error {
 	}
 
 	// Calculate the Blake3 hash of the file
-	b3hStr := util.Blake3Hash(fi)
+    b3hStr := hex.EncodeToString(hash.Sum(nil))
 
 	// Check for a Blake3 hash in the request
 	reqB3hstr := c.FormValue("blake3Hash")
