@@ -84,6 +84,7 @@ import (
 
 	_ "github.com/application-research/estuary/docs"
 	"github.com/multiformats/go-multihash"
+    "lukechampine.com/blake3"
 )
 
 // @title Estuary API
@@ -897,12 +898,13 @@ func (s *Server) handleAdd(c echo.Context, u *User) error {
 		filename = fvname
 	}
 
-	fi, err := mpf.Open()
+	_fi, err := mpf.Open()
 	if err != nil {
 		return err
 	}
-
-	defer fi.Close()
+    defer _fi.Close()
+	hash := blake3.New(32, nil)
+	fi := io.TeeReader(_fi, hash)
 
 	replication := s.CM.Replication
 	replVal := c.FormValue("replication")
@@ -966,8 +968,7 @@ func (s *Server) handleAdd(c echo.Context, u *User) error {
 		}
 	}
 
-	// Calculate the Blake3 hash of the file
-	b3hStr := util.Blake3Hash(fi)
+    b3hStr := hex.EncodeToString(hash.Sum(nil))
 
 	// Check for a Blake3 hash in the request
 	reqB3hstr := c.FormValue("blake3Hash")
