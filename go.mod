@@ -58,12 +58,12 @@ require (
 	github.com/ipld/go-ipld-prime v0.16.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/labstack/echo/v4 v4.7.2
-	github.com/libp2p/go-libp2p v0.18.0
+	github.com/libp2p/go-libp2p v0.18.1
 	github.com/libp2p/go-libp2p-connmgr v0.3.1
 	github.com/libp2p/go-libp2p-core v0.14.0
 	github.com/libp2p/go-libp2p-kad-dht v0.15.0
 	github.com/libp2p/go-libp2p-record v0.1.3
-	github.com/libp2p/go-libp2p-resource-manager v0.1.5
+	github.com/libp2p/go-libp2p-resource-manager v0.2.0
 	github.com/libp2p/go-libp2p-routing-helpers v0.2.3
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/multiformats/go-multiaddr v0.5.0
@@ -92,12 +92,14 @@ require (
 
 require (
 	github.com/filecoin-project/go-legs v0.3.11
+	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/ipfs/go-ipfs v0.11.0
-	github.com/labstack/echo-contrib v0.13.0
 	github.com/libp2p/go-libp2p-pubsub v0.6.1
 	github.com/pkg/errors v0.9.1
+	github.com/spruceid/siwe-go v0.2.0
+	lukechampine.com/blake3 v1.1.7
 )
 
 require (
@@ -196,9 +198,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/gopacket v1.1.19 // indirect
-	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
-	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/graph-gophers/graphql-go v1.3.0 // indirect
 	github.com/hako/durafmt v0.0.0-20200710122514-c0fb7b4da026 // indirect
@@ -278,7 +278,7 @@ require (
 	github.com/libp2p/go-libp2p-tls v0.3.1 // indirect
 	github.com/libp2p/go-libp2p-transport-upgrader v0.7.1 // indirect
 	github.com/libp2p/go-libp2p-xor v0.0.0-20210714161855-5c005aca55db // indirect
-	github.com/libp2p/go-libp2p-yamux v0.8.2 // indirect
+	github.com/libp2p/go-libp2p-yamux v0.9.0 // indirect
 	github.com/libp2p/go-mplex v0.6.0 // indirect
 	github.com/libp2p/go-msgio v0.1.0 // indirect
 	github.com/libp2p/go-nat v0.1.0 // indirect
@@ -289,7 +289,7 @@ require (
 	github.com/libp2p/go-stream-muxer-multistream v0.4.0 // indirect
 	github.com/libp2p/go-tcp-transport v0.5.1 // indirect
 	github.com/libp2p/go-ws-transport v0.6.0 // indirect
-	github.com/libp2p/go-yamux/v3 v3.0.2 // indirect
+	github.com/libp2p/go-yamux/v3 v3.1.0 // indirect
 	github.com/lucas-clemente/quic-go v0.25.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.0.3 // indirect
 	github.com/magefile/mage v1.9.0 // indirect
@@ -341,7 +341,6 @@ require (
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/spruceid/siwe-go v0.2.0 // indirect
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
 	github.com/tj/go-spin v1.1.0 // indirect
@@ -384,7 +383,6 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	howett.net/plist v0.0.0-20181124034731-591f970eefbb // indirect
-	lukechampine.com/blake3 v1.1.7 // indirect
 	modernc.org/cc v1.0.0 // indirect
 	modernc.org/golex v1.0.1 // indirect
 	modernc.org/mathutil v1.1.1 // indirect
