@@ -32,7 +32,7 @@ require (
 	github.com/ipfs/go-bitswap v0.5.2-0.20211214021705-dbfc6a1d986e
 	github.com/ipfs/go-block-format v0.0.3
 	github.com/ipfs/go-blockservice v0.2.1
-	github.com/ipfs/go-cid v0.1.0
+	github.com/ipfs/go-cid v0.2.0
 	github.com/ipfs/go-cidutil v0.0.2
 	github.com/ipfs/go-datastore v0.5.1
 	github.com/ipfs/go-ds-flatfs v0.5.1
@@ -54,8 +54,8 @@ require (
 	github.com/ipfs/go-unixfs v0.3.1
 	github.com/ipfs/go-unixfsnode v1.4.0
 	github.com/ipld/go-car v0.4.0
-	github.com/ipld/go-codec-dagpb v1.4.0
-	github.com/ipld/go-ipld-prime v0.16.0
+	github.com/ipld/go-codec-dagpb v1.5.0
+	github.com/ipld/go-ipld-prime v0.18.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/libp2p/go-libp2p v0.18.0
@@ -92,12 +92,14 @@ require (
 
 require (
 	github.com/filecoin-project/go-legs v0.3.11
+	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/ipfs/go-ipfs v0.11.0
-	github.com/labstack/echo-contrib v0.13.0
 	github.com/libp2p/go-libp2p-pubsub v0.6.1
 	github.com/pkg/errors v0.9.1
+	github.com/spruceid/siwe-go v0.2.0
+	lukechampine.com/blake3 v1.1.7
 )
 
 require (
@@ -196,9 +198,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/gopacket v1.1.19 // indirect
-	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
-	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/graph-gophers/graphql-go v1.3.0 // indirect
 	github.com/hako/durafmt v0.0.0-20200710122514-c0fb7b4da026 // indirect
@@ -314,7 +314,7 @@ require (
 	github.com/multiformats/go-multiaddr-dns v0.3.1 // indirect
 	github.com/multiformats/go-multiaddr-fmt v0.1.0 // indirect
 	github.com/multiformats/go-multibase v0.0.3 // indirect
-	github.com/multiformats/go-multicodec v0.4.1 // indirect
+	github.com/multiformats/go-multicodec v0.5.0 // indirect
 	github.com/multiformats/go-multistream v0.2.2 // indirect
 	github.com/multiformats/go-varint v0.0.6 // indirect
 	github.com/nkovacs/streamquote v1.0.0 // indirect
@@ -341,7 +341,6 @@ require (
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/spruceid/siwe-go v0.2.0 // indirect
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
 	github.com/tj/go-spin v1.1.0 // indirect
@@ -378,13 +377,12 @@ require (
 	golang.org/x/tools v0.1.9 // indirect
 	google.golang.org/genproto v0.0.0-20210917145530-b395a37504d4 // indirect
 	google.golang.org/grpc v1.48.0 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/cheggaaa/pb.v1 v1.0.28 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	howett.net/plist v0.0.0-20181124034731-591f970eefbb // indirect
-	lukechampine.com/blake3 v1.1.7 // indirect
 	modernc.org/cc v1.0.0 // indirect
 	modernc.org/golex v1.0.1 // indirect
 	modernc.org/mathutil v1.1.1 // indirect
